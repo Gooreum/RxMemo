@@ -10,12 +10,17 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-class MemoListViewController: UIViewController {
+class MemoListViewController: UIViewController, ViewModelBindableType {
 
+    var viewModel: MemoListViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
 
     }
-
+    
+    func bindViewModel() {
+         
+    }
 }
