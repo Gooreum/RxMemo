@@ -14,6 +14,8 @@
 		2ED62A3C26A7372000836B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED62A3B26A7372000836B7A /* Assets.xcassets */; };
 		2ED62A3F26A7372000836B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED62A3D26A7372000836B7A /* LaunchScreen.storyboard */; };
 		2ED62A4C26A73CFB00836B7A /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A4B26A73CFB00836B7A /* Memo.swift */; };
+		2ED62A4E26A73DA400836B7A /* MemoStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A4D26A73DA400836B7A /* MemoStorageType.swift */; };
+		2ED62A5426A73E7200836B7A /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A5326A73E7200836B7A /* MemoryStorage.swift */; };
 		DC7B0665E8272BC199E83392 /* Pods_RxMemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CEF78B65E2669451D81FB1 /* Pods_RxMemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		2ED62A3E26A7372000836B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2ED62A4026A7372000836B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ED62A4B26A73CFB00836B7A /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		2ED62A4D26A73DA400836B7A /* MemoStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStorageType.swift; sourceTree = "<group>"; };
+		2ED62A5326A73E7200836B7A /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		44FB78369236BE19B643A257 /* Pods-RxMemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxMemo.release.xcconfig"; path = "Target Support Files/Pods-RxMemo/Pods-RxMemo.release.xcconfig"; sourceTree = "<group>"; };
 		A5CEF78B65E2669451D81FB1 /* Pods_RxMemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxMemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E752074C698FDCC9020F4B22 /* Pods-RxMemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxMemo.debug.xcconfig"; path = "Target Support Files/Pods-RxMemo/Pods-RxMemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +78,6 @@
 				2ED62A3126A7372000836B7A /* SceneDelegate.swift */,
 				2ED62A3B26A7372000836B7A /* Assets.xcassets */,
 				2ED62A4026A7372000836B7A /* Info.plist */,
-				2ED62A3826A7372000836B7A /* RxMemo.xcdatamodeld */,
 			);
 			path = RxMemo;
 			sourceTree = "<group>";
@@ -106,6 +109,9 @@
 		2ED62A4926A73B9800836B7A /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				2ED62A5226A73E4100836B7A /* MemoryStorage */,
+				2ED62A5126A73E3500836B7A /* CoreDataStorage */,
+				2ED62A4D26A73DA400836B7A /* MemoStorageType.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -115,6 +121,22 @@
 			children = (
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		2ED62A5126A73E3500836B7A /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				2ED62A3826A7372000836B7A /* RxMemo.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		2ED62A5226A73E4100836B7A /* MemoryStorage */ = {
+			isa = PBXGroup;
+			children = (
+				2ED62A5326A73E7200836B7A /* MemoryStorage.swift */,
+			);
+			path = MemoryStorage;
 			sourceTree = "<group>";
 		};
 		53A0B1BABA3BE83C7D15F664 /* Frameworks */ = {
@@ -248,7 +270,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED62A5426A73E7200836B7A /* MemoryStorage.swift in Sources */,
 				2ED62A3026A7372000836B7A /* AppDelegate.swift in Sources */,
+				2ED62A4E26A73DA400836B7A /* MemoStorageType.swift in Sources */,
 				2ED62A3226A7372000836B7A /* SceneDelegate.swift in Sources */,
 				2ED62A3A26A7372000836B7A /* RxMemo.xcdatamodeld in Sources */,
 				2ED62A4C26A73CFB00836B7A /* Memo.swift in Sources */,
