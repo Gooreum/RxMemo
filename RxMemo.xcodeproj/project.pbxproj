@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2ED62A3026A7372000836B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A2F26A7372000836B7A /* AppDelegate.swift */; };
 		2ED62A3226A7372000836B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A3126A7372000836B7A /* SceneDelegate.swift */; };
-		2ED62A3426A7372000836B7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A3326A7372000836B7A /* ViewController.swift */; };
 		2ED62A3726A7372000836B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED62A3526A7372000836B7A /* Main.storyboard */; };
 		2ED62A3A26A7372000836B7A /* RxMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A3826A7372000836B7A /* RxMemo.xcdatamodeld */; };
 		2ED62A3C26A7372000836B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ED62A3B26A7372000836B7A /* Assets.xcassets */; };
@@ -21,7 +20,6 @@
 		2ED62A2C26A7372000836B7A /* RxMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED62A2F26A7372000836B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ED62A3126A7372000836B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2ED62A3326A7372000836B7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2ED62A3626A7372000836B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ED62A3926A7372000836B7A /* RxMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RxMemo.xcdatamodel; sourceTree = "<group>"; };
 		2ED62A3B26A7372000836B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,16 +63,55 @@
 		2ED62A2E26A7372000836B7A /* RxMemo */ = {
 			isa = PBXGroup;
 			children = (
+				2ED62A4A26A73BAC00836B7A /* Scene */,
+				2ED62A4926A73B9800836B7A /* Service */,
+				2ED62A4826A73B8F00836B7A /* ViewModel */,
+				2ED62A4726A73B7200836B7A /* ViewController */,
+				2ED62A4626A73B6100836B7A /* Model */,
 				2ED62A2F26A7372000836B7A /* AppDelegate.swift */,
 				2ED62A3126A7372000836B7A /* SceneDelegate.swift */,
-				2ED62A3326A7372000836B7A /* ViewController.swift */,
-				2ED62A3526A7372000836B7A /* Main.storyboard */,
 				2ED62A3B26A7372000836B7A /* Assets.xcassets */,
-				2ED62A3D26A7372000836B7A /* LaunchScreen.storyboard */,
 				2ED62A4026A7372000836B7A /* Info.plist */,
 				2ED62A3826A7372000836B7A /* RxMemo.xcdatamodeld */,
 			);
 			path = RxMemo;
+			sourceTree = "<group>";
+		};
+		2ED62A4626A73B6100836B7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2ED62A4726A73B7200836B7A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2ED62A3526A7372000836B7A /* Main.storyboard */,
+				2ED62A3D26A7372000836B7A /* LaunchScreen.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2ED62A4826A73B8F00836B7A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2ED62A4926A73B9800836B7A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		2ED62A4A26A73BAC00836B7A /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		53A0B1BABA3BE83C7D15F664 /* Frameworks */ = {
@@ -208,7 +245,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ED62A3426A7372000836B7A /* ViewController.swift in Sources */,
 				2ED62A3026A7372000836B7A /* AppDelegate.swift in Sources */,
 				2ED62A3226A7372000836B7A /* SceneDelegate.swift in Sources */,
 				2ED62A3A26A7372000836B7A /* RxMemo.xcdatamodeld in Sources */,
