@@ -34,9 +34,33 @@ class MemoDetailViewModel: CommonViewModel {
         super.init(title: title, sceneCoordinator: sceneCoordinator, storage: storage)
     }
     
+    //편집 액션
+    func performUpdate(memo: Memo) -> Action<String, Void> {
+        return Action { input in
+            self.storage.update(memo: memo, content: input)
+                .subscribe(onNext: { updated in
+                    self.contents.onNext([
+                                            updated.content, self.formatter.string(from: updated.insertDate)])
+                })
+                .disposed(by: self.rx.disposeBag)
+            
+            return Observable.empty()
+        }
+    }
+    
+    func makeEditAction() -> CocoaAction {
+        return CocoaAction { _ in
+            let composeViewModel = MemoComposeViewModel(title: "메모 편집", content: self.memo.content, sceneCoordinator: self.sceneCoordinator as! SceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
+            
+            let composeScene = Scene.compose(composeViewModel)
+            
+            return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true).asObservable().map { _ in }
+            
+        }
+    }
     
     //백버튼과 바인딩할 액션 -> 뒤로가기 했을 때 네비게이션 스택 맞춰주기 위한 목적
-    lazy var popAction = CocoaAction { [unowned self] in
-        return self.sceneCoordinator.close(animated: true).asObservable().map { _ in }
-    }
+//    lazy var popAction = CocoaAction { [unowned self] in
+//        return self.sceneCoordinator.close(animated: true).asObservable().map { _ in }
+//    }
 }

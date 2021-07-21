@@ -52,7 +52,12 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
             }
             .disposed(by: rx.disposeBag)
         
-        //뒤로가기 할 때, 네비게이션 스택 조절해주기 위한 목적
+        
+        //편집하기 버튼 바인딩하기
+        editButton.rx.action = viewModel.makeEditAction()
+        
+        //뒤로가기 할 때, 네비게이션 스택 조절해주기 위한 목적 -> 삭제!
+        //scenecoordinator
 //        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
 //        viewModel.title
 //            .drive(backButton.rx.title)
