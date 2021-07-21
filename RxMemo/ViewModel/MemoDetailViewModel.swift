@@ -59,6 +59,8 @@ class MemoDetailViewModel: CommonViewModel {
         }
     }
     
+    
+    
     //백버튼과 바인딩할 액션 -> 뒤로가기 했을 때 네비게이션 스택 맞춰주기 위한 목적
 //    lazy var popAction = CocoaAction { [unowned self] in
 //        return self.sceneCoordinator.close(animated: true).asObservable().map { _ in }

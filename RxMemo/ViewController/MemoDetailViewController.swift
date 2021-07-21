@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import NSObject_Rx
+
 
 class MemoDetailViewController: UIViewController, ViewModelBindableType {
     
@@ -55,6 +55,20 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         
         //편집하기 버튼 바인딩하기
         editButton.rx.action = viewModel.makeEditAction()
+        
+        
+        //공유하기 버튼
+      //  shareButton.rx.action = viewModel.makeShareAction()
+        shareButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: {[unowned self] _ in
+                let memo = self.viewModel.memo.content
+
+                let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
+                self.present(vc, animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
+
         
         //뒤로가기 할 때, 네비게이션 스택 조절해주기 위한 목적 -> 삭제!
         //scenecoordinator
