@@ -22,7 +22,6 @@ class MemoListViewModel: CommonViewModel {
         }
     }
     
-    
     func performCancel(memo: Memo) -> CocoaAction {
         return Action {
             return self.storage.delete(memo: memo).map { _ in }
