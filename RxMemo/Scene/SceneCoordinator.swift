@@ -9,6 +9,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+//실제 화면에 나타나 있는 뷰 컨트롤러를 리턴하는 속성
+extension UIViewController {
+    var sceneViewController: UIViewController {
+        return self.children.first ?? self
+    }
+}
+
 //SceneCoordinatorType 프로토콜을 사용해보자.
 //화면 전환을 담당하는 클래스. 윈도우 인스턴스와 현재 화면에 표시되어 있는 씬을 가지고 있어야 한다.
 class SceneCoordinator: SceneCoordinatorType {
@@ -36,24 +43,34 @@ class SceneCoordinator: SceneCoordinatorType {
         //실제 전환
         switch style {
         case .root:
-            currentVC = target
+            currentVC = target.sceneViewController
             window.rootViewController = target
             subject.onCompleted()
             
         case .push:
+            
+            print(currentVC)
+            
             guard let nav = currentVC.navigationController else { subject.onError(TransitionError.navigationControllerMissing)
                 break
             }
             
             nav.pushViewController(target, animated: animated)
-            currentVC = target
+            currentVC = target.sceneViewController
             subject.onCompleted()
+            
+        //네비게이션 변경될 때 마다, 백버튼 에러 문제 해결해주기 위한 목적. -> currentVC를 업데이트 해준다.
+            nav.rx.willShow
+                .subscribe(onNext: { [unowned self] event in
+                    self.currentVC = event.viewController.sceneViewController
+                })
+                .disposed(by: bag)
             
         case .modal:
             currentVC.present(target, animated: animated) {
                 subject.onCompleted()
             }
-            currentVC = target
+            currentVC = target.sceneViewController
         }
         
         //transition 메서드 리턴형은 completable이기 때문에 subject를 리턴할때 ignoreElements 연산자를 호출하면 completable로 변환되어 리턴된다.
@@ -69,7 +86,7 @@ class SceneCoordinator: SceneCoordinatorType {
         return Completable.create { [unowned self] completable in
             if let presentingVC = self.currentVC.presentingViewController {
                 self.currentVC.dismiss(animated: animated) {
-                    self.currentVC = presentingVC
+                    self.currentVC = presentingVC.sceneViewController
                     completable(.completed)
                 }
             } else if let nav = self.currentVC.navigationController {

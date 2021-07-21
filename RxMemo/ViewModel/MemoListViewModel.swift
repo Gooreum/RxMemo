@@ -37,7 +37,22 @@ class MemoListViewModel: CommonViewModel {
                     
                     let composeScene = Scene.compose(composeViewModel)
                     return self.sceneCoordinator.transition(to: composeScene, using: .modal, animated: true).asObservable().map { _ in }
-                }
+            }
         }
     }
+    
+    //메모 상세보기 화면으로 이동 -> 속성형태로 구현해보자.
+    //클로저 내부에서 셀프로 접근해야 되기 때문에 lazy로 선언
+    lazy var detailAction: Action<Memo, Void> = {
+        return Action { memo in
+            //디테일 뷰 모델 생성
+            let detailViewModel = MemoDetailViewModel(memo: memo, title: "메모 보기", sceneCoordinator: self.sceneCoordinator, storage: self.storage)
+            
+            //Scene 생성
+            let detailScene = Scene.detail(detailViewModel)
+            
+            return self.sceneCoordinator.transition(to: detailScene, using: .push, animated: true).asObservable().map { _ in }
+        }
+    }()
+  
 }

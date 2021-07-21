@@ -51,6 +51,16 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
                 }
             }
             .disposed(by: rx.disposeBag)
+        
+        //뒤로가기 할 때, 네비게이션 스택 조절해주기 위한 목적
+//        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+//        viewModel.title
+//            .drive(backButton.rx.title)
+//            .disposed(by: rx.disposeBag)
+//        backButton.rx.action = viewModel.popAction
+//        navigationItem.hidesBackButton = true
+//        navigationItem.leftBarButtonItem = backButton
+//        
     }
     
 }
