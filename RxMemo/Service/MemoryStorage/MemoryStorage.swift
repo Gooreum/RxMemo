@@ -21,6 +21,7 @@ class MemoryStorage: MemoStorageType {
     ]
     
     //기본값을 list로 선언하기 위해서 lazy로 선언했고,subject역시 외부에서 직접 접근할 필요가 없기 때문에 private로 선언했따.
+    //private lazy var store = PublishSubject<[Memo]>()
     private lazy var store = BehaviorSubject<[Memo]>(value: list)
     
     @discardableResult
