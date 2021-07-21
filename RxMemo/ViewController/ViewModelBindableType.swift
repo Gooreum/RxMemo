@@ -7,6 +7,10 @@
 
 import UIKit
 
+//MVVM은 뷰모델을 뷰컨트롤러의 속성으로 추가한다.
+//그런후 뷰모델과 뷰를 바인딩한다.
+//이런 역할을 하는 프로토콜을 선언하겠다.
+
 protocol ViewModelBindableType {
     //뷰모델의 타입은 뷰컨트롤러 마다 달라지기 때문에 제네릭으로 선언
     associatedtype ViewModelType
