@@ -58,7 +58,7 @@ class SceneCoordinator: SceneCoordinatorType {
         
         //transition 메서드 리턴형은 completable이기 때문에 subject를 리턴할때 ignoreElements 연산자를 호출하면 completable로 변환되어 리턴된다.
         return subject.ignoreElements().asCompletable()
-        ///subject.ignoreElements()를 리턴하면 에러가 발생하는데, asCompletable()를 붙여주면 에러가 발생 안하네.. 
+        ///subject.ignoreElements()를 리턴하면 에러가 발생하는데, asCompletable()를 붙여주면 에러가 발생 안하네..
         
     }
     
