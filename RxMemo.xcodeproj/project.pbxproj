@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E07BB2726AEA2E000A34749 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07BB2626AEA2E000A34749 /* CoreDataStorage.swift */; };
 		2E4FBDDB26A854EA0007809C /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4FBDDA26A854EA0007809C /* CommonViewModel.swift */; };
 		2ED62A3026A7372000836B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A2F26A7372000836B7A /* AppDelegate.swift */; };
 		2ED62A3226A7372000836B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED62A3126A7372000836B7A /* SceneDelegate.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E07BB2626AEA2E000A34749 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		2E4FBDDA26A854EA0007809C /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
 		2ED62A2C26A7372000836B7A /* RxMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED62A2F26A7372000836B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				2ED62A3826A7372000836B7A /* RxMemo.xcdatamodeld */,
+				2E07BB2626AEA2E000A34749 /* CoreDataStorage.swift */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ED62A5426A73E7200836B7A /* MemoryStorage.swift in Sources */,
+				2E07BB2726AEA2E000A34749 /* CoreDataStorage.swift in Sources */,
 				2ED62A6026A7440E00836B7A /* MemoComposeViewModel.swift in Sources */,
 				2ED62A6A26A844FB00836B7A /* SceneCoordinator.swift in Sources */,
 				2ED62A6626A8427200836B7A /* Scene.swift in Sources */,
