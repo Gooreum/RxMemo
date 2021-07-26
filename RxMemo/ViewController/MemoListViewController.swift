@@ -30,10 +30,15 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .disposed(by: rx.disposeBag)
         
         //메모 목록을 테이블뷰와 바인딩한다.
+//        viewModel.memoList
+//            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
+//                cell.textLabel?.text = memo.content
+//            }
+//            .disposed(by: rx.disposeBag)
+        
+        //메모 목록을 테이블뷰와 바인딩한다. - 데이터 소스코드로 만든 것
         viewModel.memoList
-            .bind(to: listTableView.rx.items(cellIdentifier: "cell")) { row, memo, cell in
-                cell.textLabel?.text = memo.content
-            }
+            .bind(to: listTableView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: rx.disposeBag)
      
         

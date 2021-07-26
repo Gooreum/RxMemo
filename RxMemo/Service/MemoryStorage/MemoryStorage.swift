@@ -20,22 +20,27 @@ class MemoryStorage: MemoStorageType {
         Memo(content: "Bye", insertDate: Date().addingTimeInterval(-20))
     ]
     
+    private lazy var sectionModel = MemoSectionModel(model: 0, items: list)
+    
     //기본값을 list로 선언하기 위해서 lazy로 선언했고,subject역시 외부에서 직접 접근할 필요가 없기 때문에 private로 선언했따.
     //private lazy var store = PublishSubject<[Memo]>()
-    private lazy var store = BehaviorSubject<[Memo]>(value: list)
+    private lazy var store = BehaviorSubject<[MemoSectionModel]>(value: [sectionModel])
     
     @discardableResult
     func createMemo(content: String) -> Observable<Memo> {
         let memo = Memo(content: content)
-        list.insert(memo, at:0)
+       //list.insert(memo, at:0)
         
-        store.onNext(list)
+        sectionModel.items.insert(memo, at:0)
+        
+        //store.onNext(list)
+        store.onNext([sectionModel])
         
         return Observable.just(memo)
     }
     
     @discardableResult
-    func memoList() -> Observable<[Memo]> {
+    func memoList() -> Observable<[MemoSectionModel]> {
         return store
     }
     
@@ -43,23 +48,38 @@ class MemoryStorage: MemoStorageType {
     func update(memo: Memo, content: String) -> Observable<Memo> {
         let updated = Memo(original: memo, updateContent: content)
         
-        if let index = list.firstIndex(where: { $0 == memo}) {
-            list.remove(at: index)
-            list.insert(updated, at: index)
+//        if let index = list.firstIndex(where: { $0 == memo}) {
+//            list.remove(at: index)
+//            list.insert(updated, at: index)
+//        }
+        
+        if let index = sectionModel.items.firstIndex(where: { $0 == memo}) {
+//            list.remove(at: index)
+//            list.insert(updated, at: index)
+            sectionModel.items.remove(at: index)
+            sectionModel.items.insert(updated, at: index)
+            
+            
         }
         
-        store.onNext(list)
+        store.onNext([sectionModel])
         
         return Observable.just(updated)
     }
     
     @discardableResult
     func delete(memo: Memo) -> Observable<Memo> {
-        if let index = list.firstIndex(where: { $0 == memo}) {
-            list.remove(at: index)
+        //그냥 cocoaAction을 사용할 경우
+//        if let index = list.firstIndex(where: { $0 == memo}) {
+//           list.remove(at: index)
+//        }
+
+        if let index = sectionModel.items.firstIndex(where: { $0 == memo}) {
+            sectionModel.items.remove(at: index)
         }
         
-        store.onNext(list)
+        
+        store.onNext([sectionModel])
         
         return Observable.just(memo)
     }

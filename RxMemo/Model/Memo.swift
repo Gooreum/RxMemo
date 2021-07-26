@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Memo: Equatable {
+//RxDataSources는 Tableview, collectionview에 바인딩할 수 있는 데이터 소스를 제공한다. -> 데이터 소스에 저장되는 모든 데이터는 반드시 IdentifiableType 프로토콜을 채용해야 한다.
+import RxDataSources
+
+struct Memo: Equatable, IdentifiableType {
+        
     var content: String
     var insertDate: Date
     var identity: String
