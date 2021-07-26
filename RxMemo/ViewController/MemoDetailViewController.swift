@@ -56,6 +56,9 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         //편집하기 버튼 바인딩하기
         editButton.rx.action = viewModel.makeEditAction()
         
+        //삭제버튼과 바인딩하기
+        deleteButton.rx.action = viewModel.makeDeleteAction()
+        
         
         //공유하기 버튼
       //  shareButton.rx.action = viewModel.makeShareAction()

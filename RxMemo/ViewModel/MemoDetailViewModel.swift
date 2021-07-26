@@ -48,6 +48,7 @@ class MemoDetailViewModel: CommonViewModel {
         }
     }
     
+    //편집하기
     func makeEditAction() -> CocoaAction {
         return CocoaAction { _ in
             let composeViewModel = MemoComposeViewModel(title: "메모 편집", content: self.memo.content, sceneCoordinator: self.sceneCoordinator as! SceneCoordinator, storage: self.storage, saveAction: self.performUpdate(memo: self.memo))
@@ -65,4 +66,14 @@ class MemoDetailViewModel: CommonViewModel {
 //    lazy var popAction = CocoaAction { [unowned self] in
 //        return self.sceneCoordinator.close(animated: true).asObservable().map { _ in }
 //    }
+    
+    
+    //삭제 바인딩
+    func makeDeleteAction() -> CocoaAction {
+        //Action에서는 메모를 삭제후 이전 화면으로 돌아간다.
+        return Action { input in
+            self.storage.delete(memo: self.memo)
+            return self.sceneCoordinator.close(animated: true).asObservable().map { _ in }
+        }
+    }
 }

@@ -49,5 +49,12 @@ class MemoListViewController: UIViewController, ViewModelBindableType {
             .bind(to: viewModel.detailAction.inputs)
             .disposed(by: rx.disposeBag)
         
+        
+        //TableView의 스와이프 액션(삭제)
+        listTableView.rx.modelDeleted(Memo.self)
+        //이 메서드는 컨트롤 이벤트를 리턴하고, 컨트롤 이벤트는 메모를 삭제할 때 마다 넥스트 이벤트를 방출한다.
+        //컨트롤 이벤트를 delete 액션과 바인딩한다.
+            .bind(to: viewModel.deleteAction.inputs)
+            .disposed(by: rx.disposeBag)
     }
 }
