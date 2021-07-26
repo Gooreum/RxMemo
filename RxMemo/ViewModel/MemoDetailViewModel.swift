@@ -11,7 +11,7 @@ import RxSwift
 import Action
 
 class MemoDetailViewModel: CommonViewModel {
-    let memo: Memo
+    var memo: Memo
     
     //날짜를 문자로 변경할 때 사용
     private var formatter: DateFormatter = {
@@ -39,6 +39,9 @@ class MemoDetailViewModel: CommonViewModel {
         return Action { input in
             self.storage.update(memo: memo, content: input)
                 .subscribe(onNext: { updated in
+                    //아래 코드는 메모 편집후, 다시 편집버튼을 눌렀을 때 편집한 메모 내용이 업데이트 되지 않는 문제를 해결하기 위함.
+                    self.memo = updated
+                    
                     self.contents.onNext([
                                             updated.content, self.formatter.string(from: updated.insertDate)])
                 })
