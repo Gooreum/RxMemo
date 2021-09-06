@@ -10,6 +10,11 @@ import RxSwift
 import RxCocoa
 
 
+enum ActionType {
+    case ok
+    case cancel
+}
+
 class MemoDetailViewController: UIViewController, ViewModelBindableType {
     
     
@@ -57,32 +62,75 @@ class MemoDetailViewController: UIViewController, ViewModelBindableType {
         editButton.rx.action = viewModel.makeEditAction()
         
         //삭제버튼과 바인딩하기
-        deleteButton.rx.action = viewModel.makeDeleteAction()
+        //deleteButton.rx.action = viewModel.makeDeleteAction()
+        deleteButton.rx.tap
+            .flatMap { [unowned self] in self.alert(title: "Current Color", message: "삭제하시겠습니까?")}
+            .subscribe(onNext: { [unowned self] actionType in
+                switch actionType {
+                case .ok:
+                     viewModel.makeDeleteAction()
+                case .cancel:
+                    print("cancel")
+                default:
+                    break
+                }
+            })
+            .disposed(by: rx.disposeBag)
         
         
         //공유하기 버튼
-      //  shareButton.rx.action = viewModel.makeShareAction()
+        //  shareButton.rx.action = viewModel.makeShareAction()
         shareButton.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: {[unowned self] _ in
                 let memo = self.viewModel.memo.content
-
+                
                 let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
                 self.present(vc, animated: true, completion: nil)
             })
             .disposed(by: rx.disposeBag)
-
+        
         
         //뒤로가기 할 때, 네비게이션 스택 조절해주기 위한 목적 -> 삭제!
         //scenecoordinator
-//        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
-//        viewModel.title
-//            .drive(backButton.rx.title)
-//            .disposed(by: rx.disposeBag)
-//        backButton.rx.action = viewModel.popAction
-//        navigationItem.hidesBackButton = true
-//        navigationItem.leftBarButtonItem = backButton
-//        
+        //        var backButton = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+        //        viewModel.title
+        //            .drive(backButton.rx.title)
+        //            .disposed(by: rx.disposeBag)
+        //        backButton.rx.action = viewModel.popAction
+        //        navigationItem.hidesBackButton = true
+        //        navigationItem.leftBarButtonItem = backButton
+        //
     }
     
+}
+
+extension UIViewController {
+    //Alert 창
+    func alert(title: String, message: String? = nil) -> Observable<ActionType> {
+        return Observable.create { [weak self] observer in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default) {
+                _ in
+                observer.onNext(.ok)
+                observer.onCompleted()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
+                _ in
+                observer.onNext(.cancel)
+                observer.onCompleted()
+            }
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            
+            self?.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }

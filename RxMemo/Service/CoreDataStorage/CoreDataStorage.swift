@@ -36,7 +36,6 @@ class CoreDataStorage : MemoStorageType {
     }
     
     // MARK: 기본 CRUD ---
-    
     @discardableResult
     func createMemo(content: String) -> Observable<Memo> {
         let memo = Memo(content: content)
@@ -71,7 +70,6 @@ class CoreDataStorage : MemoStorageType {
     
     @discardableResult
     func delete(memo: Memo) -> Observable<Memo> {
-        
         
         do {
             try mainContext.rx.delete(memo)

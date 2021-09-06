@@ -26,6 +26,5 @@ class CommonViewModel: NSObject {
         self.sceneCoordinator = sceneCoordinator
         self.storage = storage
     }
-    
 }
 

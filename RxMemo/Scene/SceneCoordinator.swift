@@ -82,25 +82,46 @@ class SceneCoordinator: SceneCoordinatorType {
     @discardableResult
     func close(animated: Bool) -> Completable {
         //transiotion 메서드의 코드 길이 비교하기 위해 completable로 코드를 작성해보자.
+        let subject = PublishSubject<Void>()
         
-        return Completable.create { [unowned self] completable in
-            if let presentingVC = self.currentVC.presentingViewController {
-                self.currentVC.dismiss(animated: animated) {
-                    self.currentVC = presentingVC.sceneViewController
-                    completable(.completed)
-                }
-            } else if let nav = self.currentVC.navigationController {
-                guard nav.popViewController(animated: animated) != nil else {
-                    completable(.error(TransitionError.cannotPop))
-                    return Disposables.create()
-                }
-                self.currentVC = nav.viewControllers.last!
-                completable(.completed)
-            } else {
-                completable(.error(TransitionError.unknown))
+        if let presentingVC = self.currentVC.presentingViewController {
+            self.currentVC.dismiss(animated: animated) {
+                self.currentVC = presentingVC.sceneViewController
+                subject.onCompleted()
+            }
+        } else if let nav = self.currentVC.navigationController {
+            guard nav.popViewController(animated: animated) != nil else {
+                subject.onError(TransitionError.cannotPop)
+                return subject.ignoreElements().asCompletable()
             }
             
-            return Disposables.create()
+            self.currentVC = nav.viewControllers.last!
+            subject.onCompleted()
+        } else {
+            subject.onError(TransitionError.unknown)
         }
+        
+        return subject.ignoreElements().asCompletable()
+        
+        
+//        return Completable.create { [unowned self] completable in
+//            if let presentingVC = self.currentVC.presentingViewController {
+//                self.currentVC.dismiss(animated: animated) {
+//                    self.currentVC = presentingVC.sceneViewController
+//                    completable(.completed)
+//                }
+//            } else if let nav = self.currentVC.navigationController {
+//                guard nav.popViewController(animated: animated) != nil else {
+//                    completable(.error(TransitionError.cannotPop))
+//                    return Disposables.create()
+//                }
+//                self.currentVC = nav.viewControllers.last!
+//                completable(.completed)
+//            } else {
+//                completable(.error(TransitionError.unknown))
+//            }
+//            
+//            return Disposables.create()
+//        }
     }
 }
